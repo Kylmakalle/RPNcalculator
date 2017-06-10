@@ -6,8 +6,8 @@ void calculating(char* OPZSTR, int len)
 {
 	string answer;
 	float stack[100];
-	// sp = индекс ячейки, куда будет push-иться очередное число
-	int sp = 0;      // (sp-1) = индекс ячейки, являющейся вершиной стека
+	// sp = index where number will be pushed //РёРЅРґРµРєСЃ СЏС‡РµР№РєРё, РєСѓРґР° Р±СѓРґРµС‚ push-РёС‚СЊСЃСЏ РѕС‡РµСЂРµРґРЅРѕРµ С‡РёСЃР»Рѕ
+	int sp = 0;      // (sp-1) = HEAD index of stack //РёРЅРґРµРєСЃ СЏС‡РµР№РєРё, СЏРІР»СЏСЋС‰РµР№СЃСЏ РІРµСЂС€РёРЅРѕР№ СЃС‚РµРєР°
 	for (int j = 0; j <= len; j++) {
 		char c = OPZSTR[j];
 		if (c == 'x')
@@ -37,18 +37,18 @@ void calculating(char* OPZSTR, int len)
 		}
 
 		else {
-			for (int y = j; y < len; y++) { //просматриваем текущую строку начиная j
-				if (isdigit(OPZSTR[y]) || OPZSTR[y] == ',') {//если элемент строки число или запятая
-					answer += OPZSTR[y]; //вносим элемент строки в выходную строку
+			for (int y = j; y < len; y++) { //revewing current RPNstring from j //РїСЂРѕСЃРјР°С‚СЂРёРІР°РµРј С‚РµРєСѓС‰СѓСЋ СЃС‚СЂРѕРєСѓ РЅР°С‡РёРЅР°СЏ j
+				if (isdigit(OPZSTR[y]) || OPZSTR[y] == ',') {//if RPNstring contains number or comma //РµСЃР»Рё СЌР»РµРјРµРЅС‚ СЃС‚СЂРѕРєРё С‡РёСЃР»Рѕ РёР»Рё Р·Р°РїСЏС‚Р°СЏ
+					answer += OPZSTR[y]; //add this element to an answer string //РІРЅРѕСЃРёРј СЌР»РµРјРµРЅС‚ СЃС‚СЂРѕРєРё РІ РІС‹С…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 				}
 				else {
-					j = y; //иначе заканчиваем просмотр строки
+					j = y; //else end reviewing //РёРЅР°С‡Рµ Р·Р°РєР°РЅС‡РёРІР°РµРј РїСЂРѕСЃРјРѕС‚СЂ СЃС‚СЂРѕРєРё
 					break;
 				}
 			}
-			stack[sp] = stof(answer); //в стэк ответов заносим нашу выходную строку переведённую в тип float
+			stack[sp] = stof(answer);  //input our answer string in to stack of answers, converting to float //РІ СЃС‚СЌРє РѕС‚РІРµС‚РѕРІ Р·Р°РЅРѕСЃРёРј РЅР°С€Сѓ РІС‹С…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ РїРµСЂРµРІРµРґС‘РЅРЅСѓСЋ РІ С‚РёРї float
 			sp++;
-			answer.clear();// очищаем выходную строку
+			answer.clear(); //clearing answer string // РѕС‡РёС‰Р°РµРј РІС‹С…РѕРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
 		}
 	}
 
@@ -59,7 +59,7 @@ void calculating(char* OPZSTR, int len)
 void main(void)
 {
 
-	setlocale(LC_ALL, "Russian");
+	//setlocale(LC_ALL, "Russian");
 	int i = 0, s = 0, e = 0;
 	char vr[100], stek[100], exit[100];
 
@@ -70,11 +70,11 @@ void main(void)
 		case '+':
 			while ((s != 0) && (stek[s - 1] != '('))
 			{
-				exit[e] = stek[s - 1]; //на выход 
+				exit[e] = stek[s - 1]; //to exit //РЅР° РІС‹С…РѕРґ 
 				e++;
 				s--;
 			}
-			stek[s] = '+'; //в стек 
+			stek[s] = '+'; //to stack //РІ СЃС‚РµРє 
 			s++;
 			break;
 
@@ -156,12 +156,12 @@ void main(void)
 		e++;
 		s--;
 	}
-	cout << "ОПЗ: ";
+	cout << "ГЋГЏГ‡: ";
 	exit[e] = 'x';
 	for (i = 0; i < e; i++)
 	{
 		cout << exit[i];
 	}
-	calculating(exit, i); // считаем
+	calculating(exit, i); // calculating // СЃС‡РёС‚Р°РµРј
 
 }
