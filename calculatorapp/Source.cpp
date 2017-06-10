@@ -156,7 +156,7 @@ void main(void)
 		e++;
 		s--;
 	}
-	cout << "ÎÏÇ: ";
+	cout << "RPN: "; //cout << "ОПН: ";
 	exit[e] = 'x';
 	for (i = 0; i < e; i++)
 	{
